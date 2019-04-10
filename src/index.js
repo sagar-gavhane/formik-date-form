@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as yup from "yup";
+import { Formik, Form, Field } from "formik";
 import moment from "moment";
 import _ from "lodash";
 import "./style.css";
@@ -40,7 +39,7 @@ const DateForm = props => {
         const date = moment(formattedDate, "DD-MM-YYYY", true);
 
         if (!date.isValid()) {
-          if (day === "" || month === "" || year === "") {
+          if (day === "" && month === "" && year === "") {
             errors.date = "Date is a required field.";
           } else {
             errors.date = "Please enter a valid date.";
@@ -53,9 +52,6 @@ const DateForm = props => {
 
         return errors;
       }}
-      validationSchema={yup.object().shape({
-        date: yup.string()
-      })}
       onSubmit={() => {
         alert("form submitted !!");
       }}
